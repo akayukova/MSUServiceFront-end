@@ -52,7 +52,7 @@ export class MastersComponent implements OnInit {
     const self = this;
     self.requestService.editTask(self.tasks[i])
       .subscribe(
-        (data: Task) => {
+        (task: Task) => {
         },
         error => console.log(error)
       );

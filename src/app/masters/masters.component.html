@@ -3,22 +3,23 @@
   <input type="number" class="form-control" name="masterId"
          [(ngModel)]="id" #masterId="ngModel"
          required pattern="[1-9][0-9]*"/>
-  <button (click)="identification(id)" [disabled]="masterId.invalid">Enter</button>
+  <button class="button" (click)="identification(id)" [disabled]="masterId.invalid">Enter</button>
 </div>
 <div *ngIf="tasks">
   <h3>Greeting to {{ master.name }}</h3>
-  <table class="table table-striped">
+  <table class="table" border="1" width="50%" cellpadding="5">
     <tr>
       <th>ID</th>
       <th>Description</th>
       <th>Room</th>
       <th>Priority</th>
       <th>Status</th>
+      <th></th>
     </tr>
     <tr *ngFor="let task of tasks; let i = index">
       <td>{{ task.taskId }}</td>
       <td>{{ task.description }}</td>
-      <td>{{ task.room }}, {{ editOn[i] }}</td>
+      <td>{{ task.room }}</td>
       <td>{{ task.priority }}</td>
       <td *ngIf="(editOn[i] == true)">
         <select [(ngModel)]="tasks[i].status">
@@ -29,7 +30,7 @@
                [(ngModel)]="task.status" #staus="ngModel"
                required/>-->
       </td>
-      <td *ngIf="(editOn[i] == false)">{{ task.status }}</td>
+      <td *ngIf="(editOn[i] == false)">{{ task.status === true? 'complited':'not complited' }}</td>
       <td>
         <button *ngIf="editOn[i] === false" (click)="editor(i)">EDIT</button>
         <button *ngIf="editOn[i]" (click)="save(i)">SAVE</button>

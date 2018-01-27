@@ -1,21 +1,29 @@
 <div class="col-xs-10">
-	<div class="form-group">
-		<label>Describe your problem</label> <input class="form-control"
-			name="description" [(ngModel)]="task.description"
-			#description="ngModel" required />
-		<div [hidden]="description.valid || description.untouched"
-			class="alert alert-danger">Enter description</div>
-	</div>
-	<div class="form-group">
-		<label>Enter your room</label> <input type="number"
-			class="form-control" name="room" [(ngModel)]="task.room"
-			#room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]" />
-		<div [hidden]="room.valid || room.untouched"
-			class="alert alert-danger">Invalid room number!</div>
-	</div>
-	<div class="form-group">
-		<button class="btn btn-default"
-			[disabled]="room.invalid || description.invalid"
-			(click)="add(); task.room = ''; task.description = ''">Submit</button>
-	</div>
+  <div class="form-group">
+    <ul>
+      <li>
+      <label>Describe your problem</label>
+      <input class="form-control"
+             name="description" [(ngModel)]="task.description"
+             #description="ngModel" required/>
+
+      <span [hidden]="description.valid || description.untouched"
+            class="alert alert-danger">Enter description</span>
+      </li>
+      <li>
+        <label>Enter your room</label> <input type="number"
+                                              class="form-control" name="room" [(ngModel)]="task.room"
+                                              #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
+        <span [hidden]="room.valid || room.untouched"
+             class="alert alert-danger">Invalid room number!</span>
+      </li>
+      <li>
+        <button class="btn btn-default"
+                [disabled]="room.invalid || description.invalid"
+                (click)="add(); task.room = ''; task.description = ''">
+          Submit
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>

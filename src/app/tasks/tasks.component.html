@@ -1,21 +1,34 @@
 
       <table class="table table-striped">
         <tr>
-          <th>ID</th>
+          <th>ID
+            <button (click)="tableSorting('id')" [disabled]="disableSorting()">
+              #
+            </button>
+          </th>
           <th>Description</th>
           <th>Room</th>
-          <th>Master ID</th>
+          <th>Master ID
+            <button (click)="tableSorting('masterid')" [disabled]="disableSorting()">
+              #
+            </button>
+          </th>
           <th>Master name</th>
           <th>Specilization</th>
           <th>Priority
-            <button (click)="tableSorting('priority')">#</button>
+            <button (click)="tableSorting('priority')" [disabled]="disableSorting()">
+              #
+            </button>
           </th>
-          <th>Status</th>
+          <th>Status
+            <button (click)="tableSorting('status')" [disabled]="disableSorting()">#</button>
+          </th>
+          <th></th>
         </tr>
         <tr *ngFor="let task of tasks; let i = index">
           <td>{{ task.taskId }}</td>
           <td>{{ task.description }}</td>
-          <td>{{ task.room }}, {{ editOn[i] }}</td>
+          <td>{{ task.room }}</td>
           <td *ngIf="editOn[i] == true" colspan="3">
             <select [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
               <option  *ngFor="let master of masters; let j = index"
@@ -39,9 +52,9 @@
             <div [hidden]="priority.valid || priority.untouched"
                  class="alert alert-danger">Numbers from 1 up to 10!</div>
           </td>
-          <td>{{ task.status }}</td>
+          <td>{{ task.status ? 'complited':'not complited' }}</td>
           <td>
-            <button *ngIf="editOn[i] === false" (click)="editor(i)">EDIT</button>
+            <button *ngIf="!editOn[i]" (click)="editor(i)">EDIT</button>
             <button *ngIf="editOn[i]" (click)="save(i)" [disabled]="!priorityValid[i]">SAVE</button>
           </td>
         </tr>
