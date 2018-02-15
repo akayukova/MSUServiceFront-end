@@ -1,16 +1,27 @@
-import { EditorComponent } from './editor/editor.component';
 import {NgModule} from '@angular/core';
 import {TasksComponent} from './tasks/tasks.component';
 import {RequestComponent} from './request/request.component';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {MastersComponent} from './masters/masters.component';
+import {HomeComponent} from './home/home.component';
+import {PublicPageGuard} from './public-page.guard';
+import {AuthComponent} from './auth/auth.component';
 
 
 const routes: Routes = [
-  {path: 'tasks', component: TasksComponent },
-  {path: 'request', component: RequestComponent },
-  {path: 'editor/:id', component: EditorComponent },
-  {path: 'masters', component: MastersComponent }
+  {path: 'tasks', component: TasksComponent},
+  {path: 'request', component: RequestComponent},
+  {path: 'masters', component: MastersComponent},
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [PublicPageGuard]
+  },
+
+  {
+    path: 'login',
+    component: AuthComponent,
+  },
 //  {path: 'dashboard', component: DashboardComponent },
 //  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
 //  {path: 'detail/:id', component: HeroDetailComponent }
@@ -20,6 +31,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
 
 

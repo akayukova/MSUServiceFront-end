@@ -13,6 +13,14 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
+const mergeAuthToken = (options) => {
+  const jwt = localStorage.getItem('jwt');
+  if (jwt) {
+    return options.clone(options.hesders.set('authorization', `Bearer ${jwt}`));
+  }
+  return options;
+};
+
 @Injectable()
 export class RequestService {
 

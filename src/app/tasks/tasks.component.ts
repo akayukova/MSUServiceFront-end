@@ -2,8 +2,24 @@ import {MessageService} from '../message.service';
 import {RequestService} from '../request.service';
 import {Component, OnInit} from '@angular/core';
 import {Task} from '../task';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Master} from '../master';
+import {Paths} from '../paths';
+
+const mergeAuthToken = (options) => {
+  const jwt = localStorage.getItem('jwt');
+  if (jwt) {
+    options.headers = new HttpHeaders({'Content-Type': 'application/json',
+        'authorization': `Bearer ${jwt}`});
+    return { headers: {'Content-Type': 'application/json',
+      'authorization': `Bearer ${jwt}`}, withCredentials: true};
+  }
+  return options;
+};
+
+let httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 
 @Component({
@@ -14,20 +30,21 @@ import {Master} from '../master';
 export class TasksComponent implements OnInit {
   tasks: Task[];
   masters: Master[];
-  urlTasks = 'http://localhost:9090/test1';
-  urlMasters = 'http://localhost:9090/test';
   editOn: boolean[] = [];
   masterIndex: number[] = [];
   priorityValid: boolean[] = [];
   sorting: String = 'taskId';
 
+
   constructor(private http: HttpClient,
               public messageService: MessageService,
               private requestService: RequestService) {
+
   }
 
   ngOnInit() {
-    this.http.get(this.urlTasks).subscribe(
+    httpOptions = mergeAuthToken(httpOptions);
+    this.http.get(Paths.urlTasks, httpOptions).subscribe(
       (data: Task[]) => {
         this.tasks = data;
         for (let i = 0; i < this.tasks.length; i++) {
@@ -39,7 +56,7 @@ export class TasksComponent implements OnInit {
       error => console.log(error));
     // this.editOn.length = this.tasks.length;
     // while (undefined === this.tasks) {}
-    this.http.get(this.urlMasters).subscribe(
+    this.http.get(Paths.urlMasters).subscribe(
       (data: Master[]) => this.masters = data,
       error => console.log(error));
   }

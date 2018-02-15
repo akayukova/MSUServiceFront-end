@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Task} from './task';
 import {MessageComponent} from './message/message.component';
 import {MessageService} from './message.service';
+import {HeaderComponent} from './header/header.component';
 
 @Component({
   selector: 'app-root',
