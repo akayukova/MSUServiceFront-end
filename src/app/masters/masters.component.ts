@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Master} from '../master';
 import {HttpClient} from '@angular/common/http';
-import {RequestService} from '../request.service';
-import {MessageService} from '../message.service';
+import {RequestService} from '../services/request.service';
+import {MessageService} from '../services/message.service';
 import {Task} from '../task';
 
 @Component({

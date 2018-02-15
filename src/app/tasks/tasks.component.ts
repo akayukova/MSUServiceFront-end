@@ -1,5 +1,5 @@
-import {MessageService} from '../message.service';
-import {RequestService} from '../request.service';
+import {MessageService} from '../services/message.service';
+import {RequestService} from '../services/request.service';
 import {Component, OnInit} from '@angular/core';
 import {Task} from '../task';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -56,7 +56,7 @@ export class TasksComponent implements OnInit {
       error => console.log(error));
     // this.editOn.length = this.tasks.length;
     // while (undefined === this.tasks) {}
-    this.http.get(Paths.urlMasters).subscribe(
+    this.http.get(Paths.urlMasters, httpOptions).subscribe(
       (data: Master[]) => this.masters = data,
       error => console.log(error));
   }

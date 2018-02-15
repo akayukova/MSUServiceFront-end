@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 
 import {Task} from '../task';
 
-import {RequestService} from '../request.service';
+import {RequestService} from '../services/request.service';
 
 @Component({
   selector: 'app-request',

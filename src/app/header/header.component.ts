@@ -1,6 +1,7 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../services/auth.service';
+import {Authorities} from '../authorities';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,9 @@ import {AuthService} from '../auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isSignedIn: boolean;
+  isSignedIn: boolean = true;
   isMenuHidden = false;
+  authorities: string[] = [];
 
   constructor(private router: Router,
               private authService: AuthService) {
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
     console.log("SIGNED " + this.isSignedIn);
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
+      this.authorities = Authorities.list;
     });
   }
 

@@ -1,10 +1,11 @@
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {Injectable} from '@angular/core';
-import {JsonHttp} from './JsonHttp';
+import {JsonHttp} from '../JsonHttp';
 import {HttpHeaders} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
-import {Paths} from './paths';
+import {Paths} from '../paths';
+import {Authorities} from '../authorities';
 
 //const jwtDecode = require('jwt-decode');
 
@@ -29,6 +30,10 @@ export class AuthService {
     return this.http.post(Paths.urlAuthorization, body, httpOptions).pipe(
       tap((resp: any) => {
         localStorage.setItem('jwt', resp.token);
+        resp.authorities.forEach((el) => {
+          Authorities.list.push(el.authority);
+        });
+        Authorities.list = resp.authorities;
         this.authEvents.next(new DidLogin());
       })
     );
@@ -37,6 +42,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('authorities');
+    Authorities.list.length = 0;
     this.authEvents.next(new DidLogout());
   }
 

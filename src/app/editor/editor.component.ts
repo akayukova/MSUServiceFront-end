@@ -1,9 +1,9 @@
-import {RequestService} from '../request.service';
+import {RequestService} from '../services/request.service';
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Task} from '../task';
 import {Master} from '../master';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
 import { HttpClient } from '@angular/common/http';
 import {Location} from '@angular/common';
 

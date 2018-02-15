@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../services/auth.service';
 
 //import {styles} from './auth.component.styles';
 
@@ -19,7 +19,7 @@ export class AuthComponent {
   login(email, password) {
     this.authService.login(email, password)
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }, e => this.handleError(e));
   }
 
