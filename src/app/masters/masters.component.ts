@@ -1,9 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {Master} from '../master';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestService} from '../services/request.service';
 import {MessageService} from '../services/message.service';
 import {Task} from '../task';
+import {Paths} from '../paths';
+
+const mergeAuthToken = (options) => {
+  const jwt = localStorage.getItem('jwt');
+  if (jwt) {
+    options.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${jwt}`
+    });
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${jwt}`
+      }, withCredentials: true
+    };
+  }
+  return options;
+};
+
+let httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Component({
   selector: 'app-masters',
@@ -11,7 +33,7 @@ import {Task} from '../task';
   styleUrls: ['./masters.component.css']
 })
 export class MastersComponent implements OnInit {
-  id: number;
+  id: string;
   success: boolean;
   tasks: Task[];
   editOn: boolean[] = [];
@@ -23,6 +45,25 @@ export class MastersComponent implements OnInit {
   }
 
   ngOnInit() {
+    const self = this;
+    httpOptions = mergeAuthToken(httpOptions);
+    self.id = localStorage.getItem('id');
+    self.http.get<Master>(Paths.urlGetMasterById + `${self.id}`, httpOptions).subscribe(
+      (master: Master) => {
+        self.master = master;
+        self.http.get<Task[]>(Paths.urlGetTasksForMaster + `${self.id}`, httpOptions)
+          .subscribe(
+            (tasks: Task[]) => {
+              self.tasks = tasks;
+              self.success = true;
+              for (let i = 0; i < self.tasks.length; i++) {
+                self.editOn[i] = false;
+              }
+            },
+            error => console.log(error)
+          );
+      }
+    );
   }
 
   identification(id: number): void {

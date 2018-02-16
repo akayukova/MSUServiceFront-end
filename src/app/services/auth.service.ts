@@ -33,8 +33,8 @@ export class AuthService {
         resp.authorities.forEach((el) => {
           Authorities.list.push(el.authority);
         });
-        Authorities.list = resp.authorities;
         this.authEvents.next(new DidLogin());
+        localStorage.setItem('id', resp.id);
       })
     );
   }

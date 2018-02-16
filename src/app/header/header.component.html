@@ -7,21 +7,21 @@
 <div class="navbar-collapse" [hidden]="isMenuHidden">
 
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item" routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN")'>
-      <a class="nav-link" [routerLink]="['/tasks']">Я адмистратор</a>
+    <li class="nav-item" routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
+      <a class="nav-link" [routerLink]="['/tasks']">Администрирование</a>
     </li>
-    <li class="nav-item" routerLinkActive="active" *ngIf="isSignedIn">
-      <a class="nav-link" [routerLink]="['/masters']">Я мастер</a>
+    <li class="nav-item" routerLinkActive="active" *ngIf='isSignedIn'>
+      <a class="nav-link" [routerLink]="['/masters']">Список задач</a>
     </li>
     <li class="nav-item" routerLinkActive="active" *ngIf="!isSignedIn">
-      <a class="nav-link" [routerLink]="['/login']">Sign in</a>
+      <a class="nav-link" [routerLink]="['/login']">Войти</a>
     </li>
   </ul>
 
 </div>
 
 <div>
-  <button (click)="logout()" *ngIf="isSignedIn">LOGOUT</button>
+  <button (click)="logout()" *ngIf="isSignedIn">Выход</button>
 </div>
 </nav>
 <!--&& authorities.indexOf("ADMIN") > 0-->

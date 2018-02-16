@@ -9,10 +9,16 @@ import {Paths} from '../paths';
 const mergeAuthToken = (options) => {
   const jwt = localStorage.getItem('jwt');
   if (jwt) {
-    options.headers = new HttpHeaders({'Content-Type': 'application/json',
-        'authorization': `Bearer ${jwt}`});
-    return { headers: {'Content-Type': 'application/json',
-      'authorization': `Bearer ${jwt}`}, withCredentials: true};
+    options.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${jwt}`
+    });
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${jwt}`
+      }, withCredentials: true
+    };
   }
   return options;
 };

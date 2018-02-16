@@ -48,7 +48,7 @@ export class RequestService {
 
   getMaster(id: number): Observable<Master> {
     httpOptions = mergeAuthToken(httpOptions);
-    return this.http.get<Master>(Paths.urlGetMasterById + `${id}`).pipe(
+    return this.http.get<Master>(Paths.urlGetMasterById + `${id}`, httpOptions).pipe(
       tap(_ => this.log(`fetched master id=${id}`)),
       catchError(this.handleError<Master>(`getMaster id=${id}`))
     );
@@ -57,7 +57,7 @@ export class RequestService {
   getTasksForMaster(id: number): Observable<Task[]> {
     httpOptions = mergeAuthToken(httpOptions);
     const url = `http://localhost:9090/masters?id=${id}`;
-    return this.http.get<Task[]>(url).pipe(
+    return this.http.get<Task[]>(Paths.urlGetTasksForMaster + `${id}`).pipe(
       tap(_ => this.log(`fetched master id=${id}`)),
       catchError(this.handleError<Task[]>(`getTasksForMaster id=${id}`))
     );
