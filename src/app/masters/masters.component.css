@@ -1,45 +1,25 @@
-*{
-  position: center;
-  text-align: center;
-  font-family: Arial;
+* {
+  font-family: 'PT Sans', sans-serif;
+  line-height: 1.285714285714286;
   color: #404541;
-  line-height: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 1120px;
+  background: #f8fafc;
 }
 
 h2 {
   text-align: left;
   margin-bottom: 0;
-  font-family: Arial;
   font-size: 2em;
   color: black;
 
 }
-button {
-  position: relative;
 
-  font-family: Arial;
-  font-size: 14px;
-  color: black;
-  text-decoration: none;
-  background-color: cadetblue;
-  border-bottom: 3px solid #006666;
-  border-right: 2px solid #006666;
-}
 
-table tr:nth-child(odd){
-  background-color: #84adb6;
-}
 
-table tr:nth-child(even){
-  background-color: #e2fcff;
-}
 
-table, tr, td  {
-  border:1px solid #8C7676; /* Границы */
-  border-collapse:collapse;
-  /* Убираем двойную обводку между ячейками */
-}
 
-td {
-  padding:5px;    /* Внутренний отступ */
-}

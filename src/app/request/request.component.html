@@ -2,26 +2,28 @@
   <div class="form-group">
     <ul>
       <li>
-      <label>Describe your problem</label>
-      <input class="form-control"
-             name="description" [(ngModel)]="task.description"
-             #description="ngModel" required/>
+        <label>Опишите Вашу проблему</label>
+        <div aria-setsize="500">
+      <textarea class="big_input" rows="7"
+                name="description" [(ngModel)]="task.description"
+                #description="ngModel" required></textarea>
 
-      <span [hidden]="description.valid || description.untouched"
-            class="alert alert-danger">Enter description</span>
+          <span [hidden]="description.valid || description.untouched"
+                class="alarm">Введите описание!</span>
+        </div>
       </li>
       <li>
-        <label>Enter your room</label> <input type="number"
-                                              class="form-control" name="room" [(ngModel)]="task.room"
-                                              #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
+        <label>Введите номер комнаты</label><br>
+        <input class="big_input" type="number" name="room" [(ngModel)]="task.room"
+               #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
         <span [hidden]="room.valid || room.untouched"
-             class="alert alert-danger">Invalid room number!</span>
+              class="alarm">Такой комнаты нет!</span>
       </li>
       <li>
-        <button class="btn btn-default"
+        <button class="tag"
                 [disabled]="room.invalid || description.invalid"
                 (click)="add(); task.room = ''; task.description = ''">
-          Submit
+          Подать заявку
         </button>
       </li>
     </ul>

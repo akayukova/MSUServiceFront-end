@@ -41,7 +41,7 @@ export class RequestService {
   getTask(id: number): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.get<Task>(Paths.urlGetTaskById + `${id}`,httpOptions).pipe(
-      tap(_ => this.log(`fetched task id=${id}`)),
+      tap(_ => this.log(``)),
       catchError(this.handleError<Task>(`getTask id=${id}`))
     );
   }
@@ -49,7 +49,7 @@ export class RequestService {
   getMaster(id: number): Observable<Master> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.get<Master>(Paths.urlGetMasterById + `${id}`, httpOptions).pipe(
-      tap(_ => this.log(`fetched master id=${id}`)),
+      tap(_ => this.log(`получены сведения о мастере c id=${id}`)),
       catchError(this.handleError<Master>(`getMaster id=${id}`))
     );
   }
@@ -58,7 +58,7 @@ export class RequestService {
     httpOptions = mergeAuthToken(httpOptions);
     const url = `http://localhost:9090/masters?id=${id}`;
     return this.http.get<Task[]>(Paths.urlGetTasksForMaster + `${id}`).pipe(
-      tap(_ => this.log(`fetched master id=${id}`)),
+      tap(_ => this.log(`получены задачи для мастера c id=${id}`)),
       catchError(this.handleError<Task[]>(`getTasksForMaster id=${id}`))
     );
   }
@@ -69,7 +69,6 @@ export class RequestService {
   addTask(task: Task): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.post<Task>(Paths.urlAddTask, task, httpOptions).pipe(
-      tap((task: Task) => this.log(`added task id ${task.taskId}`)),
       catchError(this.handleError<Task>('addTask'))
     );
   }
@@ -77,19 +76,8 @@ export class RequestService {
   editTask(newTask: Task): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.post<Task>(Paths.urlEditTask, newTask, httpOptions).pipe(
-      tap((task: Task) => this.log(`edited task id ${task.taskId}`)),
+      tap((task: Task) => this.log(`изменено задание id ${task.taskId}`)),
       catchError(this.handleError<Task>('editTask'))
-    );
-  }
-
-  searchMasters(term: string): Observable<Master[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    return this.http.get<Master[]>(`api/heroes/?name=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Master[]>('searchHeroes', []))
     );
   }
 
@@ -114,7 +102,7 @@ export class RequestService {
   }
 
   private log(message: string) {
-    this.messageService.add('Your request submitted: ' + message);
+    this.messageService.add('Ваша заявка получена! ' + message);
   }
 
 }

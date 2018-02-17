@@ -1,27 +1,24 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-<button class="navbar-toggler navbar-toggler-right" type="button" (click)="toggleMenu($event)">
-  <span class="navbar-toggler-icon">*</span>
-</button>
+<h1>Repair MSU</h1>
+<nav>
+  <a routerLink='/'>Главная</a>
+  <button class="tag"  (click)="toggleMenu($event)">&#9662;&#9652;</button>
+  <div [hidden]="isMenuHidden">
 
-<a class="navbar-brand" [routerLink]="['/']">Главная</a>
-<div class="navbar-collapse" [hidden]="isMenuHidden">
+    <ul>
+      <li routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
+        <a [routerLink]="['/tasks']">Администрирование</a>
+      </li>
+      <li routerLinkActive="active" *ngIf='isSignedIn'>
+        <a [routerLink]="['/masters']">Список задач</a>
+      </li>
+      <li routerLinkActive="active" *ngIf="!isSignedIn">
+        <a [routerLink]="['/login']">Войти</a>
+      </li>
+    </ul>
 
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item" routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
-      <a class="nav-link" [routerLink]="['/tasks']">Администрирование</a>
-    </li>
-    <li class="nav-item" routerLinkActive="active" *ngIf='isSignedIn'>
-      <a class="nav-link" [routerLink]="['/masters']">Список задач</a>
-    </li>
-    <li class="nav-item" routerLinkActive="active" *ngIf="!isSignedIn">
-      <a class="nav-link" [routerLink]="['/login']">Войти</a>
-    </li>
-  </ul>
-
-</div>
-
-<div>
-  <button (click)="logout()" *ngIf="isSignedIn">Выход</button>
-</div>
+  </div>
+  <div>
+    <button class="tag" (click)="logout()" *ngIf="isSignedIn">Выход</button>
+  </div>
 </nav>
 <!--&& authorities.indexOf("ADMIN") > 0-->

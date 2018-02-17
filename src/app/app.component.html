@@ -1,7 +1,11 @@
+<html>
+<body>
 <app-header></app-header>
-<h1>{{title}}</h1>
-<nav>
-	<a routerLink='/request' (click)="messageService.clear()">Apply for request</a>
+<nav >
+  <a *ngIf="!isSignedIn" class="link" routerLink='/request' (click)="messageService.clear()">Подать заявку</a>
 </nav>
+<h2 *ngIf="isSignedIn">Добрый день, товарищ!</h2>
 <router-outlet></router-outlet>
 <app-message></app-message>
+</body>
+</html>

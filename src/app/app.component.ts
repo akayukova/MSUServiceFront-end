@@ -1,26 +1,28 @@
-import {Component} from '@angular/core';
-import {Master} from './master';
-import {HttpClient} from '@angular/common/http';
-import {Task} from './task';
-import {MessageComponent} from './message/message.component';
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from './services/message.service';
-import {HeaderComponent} from './header/header.component';
+import {Authorities} from './authorities';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Repair Service';
-  master: Master;
-  tasks: Task[];
+export class AppComponent implements OnInit{
 
-  constructor(private http: HttpClient,
-    public messageService: MessageService) {}
+  isSignedIn = false;
 
-  ngOnInit() {
+  constructor(public messageService: MessageService,
+              private authService: AuthService) {
+}
 
-    //this.http.get('http://localhost:9090//test1').subscribe((data: Task[]) => this.tasks = data);
-  }
+ngOnInit(): void {
+  this.isSignedIn = this.authService.isSignedIn();
+console.log("SIGNED " + this.isSignedIn);
+this.authService.events.subscribe(() => {
+  this.isSignedIn = this.authService.isSignedIn();
+  //this.authorities = Authorities.list;
+});
+}
+
 }

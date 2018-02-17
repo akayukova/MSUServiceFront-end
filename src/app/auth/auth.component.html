@@ -1,19 +1,17 @@
-<h1>Sign in</h1>
+<h2>Вход</h2>
 
 <form (submit)="login(email.value, password.value); $event.preventDefault()">
 
   <div class="form-group">
-    <label class="col-form-label" for="email">Email</label>
-    <input type="text" #email class="form-control" id="email"
-           placeholder="Email">
+    <label class="col-form-label" for="email">Логин</label><br>
+    <input type="text" #email class="form-control" id="email">
   </div>
 
   <div class="form-group">
-    <label class="col-form-label" for="password">Password</label>
-    <input type="password" #password class="form-control" id="password"
-           placeholder="Password">
+    <label class="col-form-label" for="password">Пароль</label><br>
+    <input type="password" #password class="form-control" id="password">
   </div>
 
-  <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+  <button class="tag" type="submit" >Войти</button>
 
 </form>

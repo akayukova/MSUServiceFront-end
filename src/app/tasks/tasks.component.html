@@ -1,64 +1,80 @@
-
-      <table class="table table-striped">
-        <tr>
-          <th>ID
-            <button (click)="tableSorting('id')" [disabled]="disableSorting()">
-              #
-            </button>
-          </th>
-          <th>Description</th>
-          <th>Room</th>
-          <th>Master ID
-            <button (click)="tableSorting('masterid')" [disabled]="disableSorting()">
-              #
-            </button>
-          </th>
-          <th>Master name</th>
-          <th>Specilization</th>
-          <th>Priority
-            <button (click)="tableSorting('priority')" [disabled]="disableSorting()">
-              #
-            </button>
-          </th>
-          <th>Status
-            <button (click)="tableSorting('status')" [disabled]="disableSorting()">#</button>
-          </th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let task of tasks; let i = index">
-          <td>{{ task.taskId }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.room }}</td>
-          <td *ngIf="editOn[i] == true" colspan="3">
-            <select [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
-              <option  *ngFor="let master of masters; let j = index"
-                       [ngValue]="master"  [selected]="task.masterId == master.masterId ? true : null">
-                {{ master.name }}, {{ master.spec }}, {{ master.timetable }}
-              </option>
-            </select>
-          </td>
-          <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.masterId }}</td>
-          <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.name }}</td>
-          <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.spec }}</td>
-          <td *ngIf="!task.master && (editOn[i] === false)"></td>
-          <td *ngIf="!task.master && (editOn[i] === false)"></td>
-          <td *ngIf="!task.master && (editOn[i] === false)"></td>
-          <td *ngIf="(editOn[i] == false)">{{ task.priority }}</td>
-          <td *ngIf="(editOn[i] == true)">
-            <input type="number" class="form-control" name="priority"
-                   [(ngModel)]="task.priority" #priority="ngModel"
-                   pattern="^([1-9]{1}|(10))" required
-                   (change)="onChangePriority(priority.valid, i)"/>
-            <div [hidden]="priority.valid || priority.untouched"
-                 class="alert alert-danger">Numbers from 1 up to 10!</div>
-          </td>
-          <td>{{ task.status ? 'complited':'not complited' }}</td>
-          <td>
-            <button *ngIf="!editOn[i]" (click)="editor(i)">EDIT</button>
-            <button *ngIf="editOn[i]" (click)="save(i)" [disabled]="!priorityValid[i]">SAVE</button>
-          </td>
-        </tr>
-      </table>
+<table class="table table-striped">
+  <colgroup>
+    <col width="5%">
+    <col width="30%">
+    <col width="7%">
+    <col width="7%">
+    <col width="10%">
+    <col width="10%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+  </colgroup>
+  <thead>
+  <tr>
+    <th>ID
+      <button class="tag" (click)="tableSorting('id')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button>
+    </th>
+    <th>Описание</th>
+    <th>Комната</th>
+    <th>ID мастера
+      <button class="tag" (click)="tableSorting('masterid')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button>
+    </th>
+    <th>Имя мастера</th>
+    <th>Профиль</th>
+    <th>Приоритет
+      <button class="tag" (click)="tableSorting('priority')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button>
+    </th>
+    <th>Статус
+      <button class="tag" (click)="tableSorting('status')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button>
+    </th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks; let i = index">
+    <td>{{ task.taskId }}</td>
+    <td>{{ task.description }}</td>
+    <td>{{ task.room }}</td>
+    <td *ngIf="editOn[i] == true" colspan="3">
+      <select class="select_limited" [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
+        <option class="select_limited" *ngFor="let master of masters; let j = index"
+                [ngValue]="master" [selected]="task.masterId == master.masterId ? true : null">
+          {{ master.name }}, {{ master.spec }}, {{ master.timetable }}
+        </option>
+      </select>
+    </td>
+    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.masterId }}</td>
+    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.name }}</td>
+    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.spec }}</td>
+    <td *ngIf="!task.master && (editOn[i] === false)"></td>
+    <td class="alarm" cjlor="#b6696d" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
+    <td *ngIf="!task.master && (editOn[i] === false)"></td>
+    <td *ngIf="(editOn[i] == false)">{{ task.priority }}</td>
+    <td *ngIf="(editOn[i] == true)">
+      <input class="small_input" type="number" name="priority"
+             [(ngModel)]="task.priority" #priority="ngModel"
+             pattern="^([1-9]{1}|(10))" required
+             (change)="onChangePriority(priority.valid, i)"/>
+      <div [hidden]="priority.valid || priority.untouched"
+           class="alarm">Числа от 1 до 10!</div>
+    </td>
+    <td ng>{{ task.status ? 'завершено':'не завершено' }}</td>
+    <td>
+      <button class="tag" *ngIf="!editOn[i]" (click)="editor(i)">править</button>
+      <button class="tag" *ngIf="editOn[i]" (click)="save(i)" [disabled]="!priorityValid[i]">ОК</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 
 

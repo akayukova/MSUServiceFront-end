@@ -1,14 +1,24 @@
 <div *ngIf="tasks">
-  <h3>Greeting to {{ master.name }}</h3>
-  <table class="table" border="1" width="50%" cellpadding="5">
+  <table *ngIf="tasks.length != 0" class="table" border="1" width="100%" cellpadding="6">
+    <colgroup>
+      <col width = "5%">
+      <col width = "50%">
+      <col width = "10%">
+      <col width = "10%">
+      <col width = "15%">
+      <col width = "10%">
+    </colgroup>
+    <thead>
     <tr>
       <th>ID</th>
-      <th>Description</th>
-      <th>Room</th>
-      <th>Priority</th>
-      <th>Status</th>
+      <th>Описание</th>
+      <th>Комната</th>
+      <th>Приоритет</th>
+      <th>Статус</th>
       <th></th>
     </tr>
+    </thead>
+    <tbody>
     <tr *ngFor="let task of tasks; let i = index">
       <td>{{ task.taskId }}</td>
       <td>{{ task.description }}</td>
@@ -25,13 +35,13 @@
       </td>
       <td *ngIf="(editOn[i] == false)">{{ task.status === true? 'complited':'not complited' }}</td>
       <td>
-        <button *ngIf="editOn[i] === false" (click)="editor(i)">EDIT</button>
-        <button *ngIf="editOn[i]" (click)="save(i)">SAVE</button>
+        <button class="tag" *ngIf="editOn[i] === false" (click)="editor(i)">править</button>
+        <button class="tag" *ngIf="editOn[i]" (click)="save(i)">SAVE</button>
       </td>
     </tr>
+    </tbody>
   </table>
-  <h3 *ngIf="tasks.length == 0">You have no any tasks yet</h3>
-  <button (click)="clearAll()">Enter another ID</button>
+  <h3 *ngIf="tasks.length == 0">У Вас пока нет задач</h3>
 </div>
 <!--<select [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
   <option  *ngFor="let master of masters; let j = index"

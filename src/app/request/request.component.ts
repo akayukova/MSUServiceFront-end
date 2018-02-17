@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 import {Task} from '../task';
 
@@ -13,7 +14,8 @@ import {RequestService} from '../services/request.service';
 export class RequestComponent implements OnInit {
 
   constructor(private requestService: RequestService,
-    private location: Location) {}
+              private location: Location, private router: Router) {
+  }
 
   task: Task = new Task();
   receivedTask: Task;
@@ -21,11 +23,17 @@ export class RequestComponent implements OnInit {
 
 
   add(): void {
-    if (!this.task) {return; }
+    if (!this.task) {
+      return;
+    }
     this.requestService.addTask(this.task)
       .subscribe(
-      (data: Task) => {this.receivedTask = data; this.done = true; },
-      error => console.log(error)
+        (data: Task) => {
+          this.receivedTask = data;
+          this.done = true;
+          this.router.navigate(['/']);
+        },
+        error => console.log(error)
       );
   }
 
