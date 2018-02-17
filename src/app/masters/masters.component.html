@@ -10,11 +10,20 @@
     </colgroup>
     <thead>
     <tr>
-      <th>ID</th>
+      <th>ID
+        <button class="tag" (click)="tableSorting('id')" [disabled]="disableSorting()">
+          &#9662;&#9652;
+        </button></th>
       <th>Описание</th>
       <th>Комната</th>
-      <th>Приоритет</th>
-      <th>Статус</th>
+      <th>Приоритет
+        <button class="tag" (click)="tableSorting('priority')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button></th>
+      <th>Статус
+        <button class="tag" (click)="tableSorting('status')" [disabled]="disableSorting()">
+          &#9662;&#9652;
+        </button></th>
       <th></th>
     </tr>
     </thead>
@@ -26,17 +35,18 @@
       <td>{{ task.priority }}</td>
       <td *ngIf="(editOn[i] == true)">
         <select [(ngModel)]="tasks[i].status">
-          <option [ngValue]="true">complited</option>
-          <option [ngValue]="false">not complited</option>
+          <option [ngValue]="true">завершено</option>
+          <option [ngValue]="false">не завершено</option>
         </select>
         <!--<input type="boolean" class="form-control" name="status"
                [(ngModel)]="task.status" #staus="ngModel"
                required/>-->
       </td>
-      <td *ngIf="(editOn[i] == false)">{{ task.status === true? 'complited':'not complited' }}</td>
+      <td class="messages" *ngIf="!editOn[i] && task.status">завершено</td>
+      <td class="alarm" *ngIf="!editOn[i] && !task.status">не завершено</td>
       <td>
         <button class="tag" *ngIf="editOn[i] === false" (click)="editor(i)">править</button>
-        <button class="tag" *ngIf="editOn[i]" (click)="save(i)">SAVE</button>
+        <button class="tag" *ngIf="editOn[i]" (click)="save(i)">ОК</button>
       </td>
     </tr>
     </tbody>

@@ -38,6 +38,7 @@ export class MastersComponent implements OnInit {
   tasks: Task[];
   editOn: boolean[] = [];
   master: Master;
+  sorting: String = 'taskId';
 
   constructor(private http: HttpClient,
               public messageService: MessageService,
@@ -66,23 +67,58 @@ export class MastersComponent implements OnInit {
     );
   }
 
-  identification(id: number): void {
-    const self = this;
-    self.requestService.getMaster(id).subscribe(
-      (master: Master) => {
-        self.master = master;
-        self.requestService.getTasksForMaster(id).subscribe(
-          (tasks: Task[]) => {
-            self.tasks = tasks;
-            self.success = true;
-            for (let i = 0; i < self.tasks.length; i++) {
-              self.editOn[i] = false;
-            }
-          },
-          error => console.log(error)
-        );
+  tableSorting(byField: string) {
+    switch (byField) {
+      case 'priority': {
+        if (this.sorting === 'priority') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => a.priority - b.priority);
+          this.sorting = 'priority';
+        }
+        break;
       }
-    );
+      case 'status': {
+        if (this.sorting === 'status') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => {
+              if (a.status === b.status) {
+                return 0;
+              }
+              if (a.status === true) {
+                return 1;
+              } else {
+                return -1;
+              }
+            });
+          this.sorting = 'status';
+        }
+        break;
+      }
+      case 'id': {
+        if (this.sorting === 'id') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => a.taskId - b.taskId);
+          this.sorting = 'id';
+        }
+        break;
+      }
+      case 'masterid': {
+        if (this.sorting === 'masterid') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => a.masterId - b.masterId);
+          this.sorting = 'masterid';
+        }
+        break;
+      }
+    }
   }
 
   editor(i: number): void {
@@ -105,6 +141,10 @@ export class MastersComponent implements OnInit {
         error => console.log(error)
       );
     self.editOn[i] = false;
+  }
+
+  disableSorting(): boolean {
+    return this.editOn.some(elem => elem === true);
   }
 
   clearAll(): void {

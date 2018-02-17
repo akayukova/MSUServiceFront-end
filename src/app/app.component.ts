@@ -11,6 +11,7 @@ import {AuthService} from './services/auth.service';
 export class AppComponent implements OnInit{
 
   isSignedIn = false;
+  masterName: string = '';
 
   constructor(public messageService: MessageService,
               private authService: AuthService) {
@@ -18,10 +19,12 @@ export class AppComponent implements OnInit{
 
 ngOnInit(): void {
   this.isSignedIn = this.authService.isSignedIn();
+  if (this.isSignedIn)
+    this.masterName = localStorage.getItem('authority0');
 console.log("SIGNED " + this.isSignedIn);
 this.authService.events.subscribe(() => {
   this.isSignedIn = this.authService.isSignedIn();
-  //this.authorities = Authorities.list;
+  this.masterName = localStorage.getItem('authority0');
 });
 }
 

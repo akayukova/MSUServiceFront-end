@@ -31,8 +31,7 @@ export class RequestComponent implements OnInit {
         (data: Task) => {
           this.receivedTask = data;
           this.done = true;
-          this.router.navigate(['/']);
-        },
+          },
         error => console.log(error)
       );
   }

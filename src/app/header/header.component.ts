@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     console.log("SIGNED " + this.isSignedIn);
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
-      this.authorities = Authorities.list;
+      this.authorities.push(localStorage.getItem('authority0'));
     });
   }
 

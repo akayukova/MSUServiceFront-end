@@ -41,7 +41,6 @@ export class RequestService {
   getTask(id: number): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.get<Task>(Paths.urlGetTaskById + `${id}`,httpOptions).pipe(
-      tap(_ => this.log(``)),
       catchError(this.handleError<Task>(`getTask id=${id}`))
     );
   }

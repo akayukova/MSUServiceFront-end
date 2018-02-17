@@ -30,8 +30,10 @@ export class AuthService {
     return this.http.post(Paths.urlAuthorization, body, httpOptions).pipe(
       tap((resp: any) => {
         localStorage.setItem('jwt', resp.token);
-        resp.authorities.forEach((el) => {
+        resp.authorities.forEach((el, i) => {
           Authorities.list.push(el.authority);
+          localStorage.setItem('authority' + i, el.authority);
+
         });
         this.authEvents.next(new DidLogin());
         localStorage.setItem('id', resp.id);

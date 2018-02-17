@@ -11,6 +11,9 @@
       <li routerLinkActive="active" *ngIf='isSignedIn'>
         <a [routerLink]="['/masters']">Список задач</a>
       </li>
+      <li routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
+        <a [routerLink]="['/request']">Подать заявку</a>
+      </li>
       <li routerLinkActive="active" *ngIf="!isSignedIn">
         <a [routerLink]="['/login']">Войти</a>
       </li>
