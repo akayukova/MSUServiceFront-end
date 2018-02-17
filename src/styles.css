@@ -194,3 +194,17 @@ label {
 .select_limited{
   width: 80%;
 }
+
+.head_menu{
+  position: absolute;
+}
+
+ul.hr .list {
+  display: inline; /* Отображать как строчный элемент */
+  margin-right: 5px; /* Отступ слева */
+  padding: 3px; /* Поля вокруг текста */
+}
+
+.list:hover {
+  border: 1px solid #59b329;
+}

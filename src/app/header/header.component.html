@@ -1,25 +1,23 @@
 <h1>Repair MSU</h1>
 <nav>
-  <a routerLink='/'>Главная</a>
-  <button class="tag"  (click)="toggleMenu($event)">&#9662;&#9652;</button>
-  <div [hidden]="isMenuHidden">
 
-    <ul>
-      <li routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
-        <a [routerLink]="['/tasks']">Администрирование</a>
-      </li>
-      <li routerLinkActive="active" *ngIf='isSignedIn'>
-        <a [routerLink]="['/masters']">Список задач</a>
-      </li>
-      <li routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
-        <a [routerLink]="['/request']">Подать заявку</a>
-      </li>
-      <li routerLinkActive="active" *ngIf="!isSignedIn">
-        <a [routerLink]="['/login']">Войти</a>
-      </li>
-    </ul>
-
-  </div>
+  <ul class="hr">
+    <li class="list">
+      <a routerLink='/'>Главная</a>
+    </li>
+    <li class="list" routerLinkActive="active" *ngIf="isSignedIn && authorities.indexOf('ADMIN') > -1">
+      <a [routerLink]="['/tasks']">Администрирование</a>
+    </li>
+    <li class="list" routerLinkActive="active" *ngIf='isSignedIn'>
+      <a [routerLink]="['/masters']">Список задач</a>
+    </li>
+    <li class="list" routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
+      <a [routerLink]="['/request']">Подать заявку</a>
+    </li>
+    <li class="list" class="list" routerLinkActive="active" *ngIf="!isSignedIn">
+      <a [routerLink]="['/login']">Войти</a>
+    </li>
+  </ul>
   <div>
     <button class="tag" (click)="logout()" *ngIf="isSignedIn">Выход</button>
   </div>

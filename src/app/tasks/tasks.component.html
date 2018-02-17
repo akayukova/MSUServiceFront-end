@@ -67,8 +67,8 @@
       <div [hidden]="priority.valid || priority.untouched"
            class="alarm">Числа от 1 до 10!</div>
     </td>
-    <td class="messages" *ngIf="!editOn[i] && task.status">завершено</td>
-    <td class="alarm" *ngIf="!editOn[i] && !task.status">не завершено</td>
+    <td class="messages" *ngIf="task.status">завершено</td>
+    <td class="alarm" *ngIf="!task.status">не завершено</td>
     <td>
       <button class="tag" *ngIf="!editOn[i]" (click)="editor(i)">править</button>
       <button class="tag" *ngIf="editOn[i]" (click)="save(i)" [disabled]="!priorityValid[i]">ОК</button>

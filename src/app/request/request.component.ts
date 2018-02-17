@@ -31,7 +31,7 @@ export class RequestComponent implements OnInit {
         (data: Task) => {
           this.receivedTask = data;
           this.done = true;
-          },
+        },
         error => console.log(error)
       );
   }

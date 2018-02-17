@@ -1,7 +1,6 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
-import {Authorities} from '../authorities';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +9,7 @@ import {Authorities} from '../authorities';
 })
 export class HeaderComponent implements OnInit {
 
-  isSignedIn: boolean = true;
+  isSignedIn = true;
   isMenuHidden = false;
   authorities: string[] = [];
 
@@ -20,7 +19,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isSignedIn = this.authService.isSignedIn();
-    console.log("SIGNED " + this.isSignedIn);
+    if (this.isSignedIn)
+      this.authorities.push(localStorage.getItem('authority0'));
+    console.log('SIGNED' + this.isSignedIn);
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
       this.authorities.push(localStorage.getItem('authority0'));
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.authorities = [];
     this.router.navigate(['/login']);
   }
 
