@@ -43,7 +43,7 @@
   <tr *ngFor="let task of tasks; let i = index">
     <td>{{ task.taskId }}</td>
     <td>{{ task.description }}</td>
-    <td>{{ task.room }}</td>
+    <td>{{ +task.room + ' ' + task.building }}</td>
     <td *ngIf="editOn[i] == true" colspan="3">
       <select class="select_limited" [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
         <option class="select_limited" *ngFor="let master of masters; let j = index"
@@ -56,7 +56,7 @@
     <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.name }}</td>
     <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.spec }}</td>
     <td *ngIf="!task.master && (editOn[i] === false)"></td>
-    <td class="alarm" cjlor="#b6696d" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
+    <td class="alarm" color="#b6696d" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
     <td *ngIf="!task.master && (editOn[i] === false)"></td>
     <td *ngIf="(editOn[i] == false)">{{ task.priority }}</td>
     <td *ngIf="(editOn[i] == true)">

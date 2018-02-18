@@ -7,21 +7,26 @@
       <textarea class="big_input" rows="7"
                 name="description" [(ngModel)]="task.description"
                 #description="ngModel" required></textarea>
-
           <span [hidden]="description.valid || description.untouched"
                 class="alarm">Обазятельное поле!</span>
         </div>
       </li>
       <li>
-        <label>Введите номер комнаты</label><br>
+        <label>Введите номер комнаты и корпус</label><br>
         <input class="big_input" type="number" name="room" [(ngModel)]="task.room"
                #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
+        <select #build ="ngModel" required [(ngModel)]="task.building" >
+          <option *ngFor="let build of buildings"
+                  [ngValue]="build" ><!--[selected]="task.building == build ? true : null"-->
+            {{build}}
+          </option>
+        </select>
         <span [hidden]="room.valid || room.untouched"
               class="alarm">Такой комнаты нет!</span>
       </li>
       <li>
         <button class="tag"
-                [disabled]="room.invalid || description.invalid"
+                [disabled]="room.invalid || description.invalid || build.invalid"
                 (click)="add(); task.room = ''; task.description = ''; room.untouched = true">
           Подать заявку
         </button>

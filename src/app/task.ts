@@ -9,5 +9,6 @@ export class Task {
   priority: number = 1;
   status: boolean;
   master: Master;
+  building: string;
 
 }

@@ -14,12 +14,13 @@ import {RequestService} from '../services/request.service';
 export class RequestComponent implements OnInit {
 
   constructor(private requestService: RequestService,
-              private location: Location, private router: Router) {
+              private location: Location) {
   }
 
   task: Task = new Task();
   receivedTask: Task;
   done = false;
+  buildings: string[] = ['Б', 'В', 'Г', 'Д', 'Е', 'Ж'];
 
 
   add(): void {
