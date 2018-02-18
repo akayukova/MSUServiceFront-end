@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
       this.masterName = localStorage.getItem('authority0');
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
-      this.masterName = localStorage.getItem('authority0');
+      this.masterName = localStorage.getItem('masterName');
       this.messageService.clear();
     });
   }

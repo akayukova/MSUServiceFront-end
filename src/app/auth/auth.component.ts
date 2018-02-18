@@ -21,8 +21,8 @@ export class AuthComponent {
 
   handleError(error) {
     switch (error.status) {
-      case 401:
-        alert('401');
+      case 403:
+        alert('Неверные имя пользователя или пароль!');
     }
   }
 

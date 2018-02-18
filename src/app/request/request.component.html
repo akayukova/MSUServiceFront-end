@@ -1,6 +1,6 @@
 <div class="col-xs-10">
   <div class="form-group">
-    <h2 class="messages" *ngIf="!isSignedIn">Здесь Вы можете оставить Вашу заявку</h2>
+    <h2 class="messages" *ngIf="!isSignedIn && !done">Здесь Вы можете оставить Вашу заявку</h2>
     <ul *ngIf="!done">
       <li>
         <label>Опишите Вашу проблему</label>
