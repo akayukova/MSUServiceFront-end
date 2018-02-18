@@ -1,9 +1,9 @@
 <html>
 <body>
 <app-header></app-header>
-<nav>
+<!--<nav>
   <a *ngIf="!isSignedIn" class="link" routerLink='/request' (click)="messageService.clear()">Подать заявку</a>
-</nav>
+</nav>-->
 <h2 *ngIf="isSignedIn">Добрый день, {{masterName}}!</h2>
 <router-outlet></router-outlet>
 <app-message></app-message>

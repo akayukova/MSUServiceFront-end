@@ -80,6 +80,14 @@ export class RequestService {
     );
   }
 
+  removeTask(task: Task) {
+    httpOptions = mergeAuthToken(httpOptions);
+    return this.http.post(Paths.urlDeleteTask, task, httpOptions).pipe(
+      tap((task: Task) => this.log(`удалено задание id ${task.taskId}`)),
+      catchError(this.handleError<Task>('deleteTask'))
+    );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

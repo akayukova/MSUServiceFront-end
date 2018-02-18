@@ -118,6 +118,16 @@ export class MastersComponent implements OnInit {
         }
         break;
       }
+      case 'time': {
+        if (this.sorting === 'id') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => (<any>a.time) -(<any> b.time));
+          this.sorting = 'id';
+        }
+        break;
+      }
     }
   }
 

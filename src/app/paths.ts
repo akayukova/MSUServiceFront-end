@@ -5,6 +5,7 @@ export class Paths {
   static urlTasks = Paths.localhost + 'api/test1';
   static urlMasters = Paths.localhost + 'api/test';
   static urlAddTask = Paths.localhost + 'api/test2';
+  static urlDeleteTask = Paths.localhost + 'api/deleteTask';
   static urlEditTask = Paths.localhost + 'api/editTask';
   static urlGetTaskById = Paths.localhost + 'api/tasks?id=';
   static urlGetMasterById = Paths.localhost + 'api/master?id=';

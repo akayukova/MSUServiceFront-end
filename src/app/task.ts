@@ -10,5 +10,6 @@ export class Task {
   status: boolean;
   master: Master;
   building: string;
+  time: Date;
 
 }

@@ -2,7 +2,8 @@
   <table *ngIf="tasks.length != 0" class="table" border="1" width="100%" cellpadding="6">
     <colgroup>
       <col width = "5%">
-      <col width = "50%">
+      <col width = "30%">
+      <col width = "10%">
       <col width = "10%">
       <col width = "10%">
       <col width = "15%">
@@ -15,6 +16,11 @@
           &#9662;&#9652;
         </button></th>
       <th>Описание</th>
+      <th>Время
+        <button class="tag" (click)="tableSorting('time')" [disabled]="disableSorting()">
+          &#9662;&#9652;
+        </button>
+      </th>
       <th>Комната</th>
       <th>Приоритет
         <button class="tag" (click)="tableSorting('priority')" [disabled]="disableSorting()">
@@ -31,6 +37,7 @@
     <tr *ngFor="let task of tasks; let i = index">
       <td>{{ task.taskId }}</td>
       <td>{{ task.description }}</td>
+      <td>{{task.time | date: 'dd.MM.yy h:mm'}}</td>
       <td>{{ task.room + ' ' + task.building}}</td>
       <td>{{ task.priority }}</td>
       <td *ngIf="(editOn[i] == true)">

@@ -1,7 +1,8 @@
 <table class="table table-striped">
   <colgroup>
     <col width="5%">
-    <col width="30%">
+    <col width="20%">
+    <col width="10%">
     <col width="7%">
     <col width="7%">
     <col width="10%">
@@ -18,6 +19,11 @@
       </button>
     </th>
     <th>Описание</th>
+    <th>Время
+      <button class="tag" (click)="tableSorting('time')" [disabled]="disableSorting()">
+        &#9662;&#9652;
+      </button>
+    </th>
     <th>Комната</th>
     <th>ID мастера
       <button class="tag" (click)="tableSorting('masterid')" [disabled]="disableSorting()">
@@ -43,9 +49,10 @@
   <tr *ngFor="let task of tasks; let i = index">
     <td>{{ task.taskId }}</td>
     <td>{{ task.description }}</td>
+    <td>{{task.time | date: 'dd.MM.yy h:mm'}}</td>
     <td>{{ +task.room + ' ' + task.building }}</td>
     <td *ngIf="editOn[i] == true" colspan="3">
-      <select class="select_limited" [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
+      <select class="select_limited" [(ngModel)]="task.master" (ngModelChange)="onChangeMaster($event, i)">
         <option class="select_limited" *ngFor="let master of masters; let j = index"
                 [ngValue]="master" [selected]="task.masterId == master.masterId ? true : null">
           {{ master.name }}, {{ master.spec }}, {{ master.timetable }}
@@ -72,6 +79,7 @@
     <td>
       <button class="tag" *ngIf="!editOn[i]" (click)="editor(i)">править</button>
       <button class="tag" *ngIf="editOn[i]" (click)="save(i)" [disabled]="!priorityValid[i]">ОК</button>
+      <button class="tag" *ngIf="editOn[i]" (click)="delete(i)" [disabled]="!priorityValid[i]">удалить</button>
     </td>
   </tr>
   </tbody>

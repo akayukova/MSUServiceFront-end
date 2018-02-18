@@ -37,7 +37,6 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   masters: Master[];
   editOn: boolean[] = [];
-  masterIndex: number[] = [];
   priorityValid: boolean[] = [];
   sorting: String = 'taskId';
 
@@ -55,7 +54,6 @@ export class TasksComponent implements OnInit {
         this.tasks = data;
         for (let i = 0; i < this.tasks.length; i++) {
           this.editOn[i] = false;
-          this.masterIndex[i] = 0;
           this.priorityValid[i] = true;
         }
       },
@@ -87,6 +85,17 @@ export class TasksComponent implements OnInit {
       );
     this.editOn[i] = false;
     this.priorityValid[i] = true;
+  }
+
+  delete(i: number) {
+    this.requestService.removeTask(this.tasks[i]).subscribe(
+      (data: Task) => {
+        this.tasks.splice(i, 1);
+        this.editOn.splice(i, 1);
+      },
+      error => console.log(error)
+    );
+
   }
 
   tableSorting(byField: string) {
@@ -140,11 +149,20 @@ export class TasksComponent implements OnInit {
         }
         break;
       }
+      case 'time': {
+        if (this.sorting === 'id') {
+          this.tasks.reverse();
+        } else {
+          this.tasks.sort(
+            (a: Task, b: Task): number => (<any>a.time) - (<any> b.time));
+          this.sorting = 'id';
+        }
+        break;
+      }
     }
   }
 
   onChangeMaster(master: Master, i: number) {
-    this.masterIndex[i] = master.masterId;
     this.tasks[i].masterId = master.masterId;
   }
 
