@@ -3,7 +3,7 @@
   <input type="number" name="taskId"
          [(ngModel)]="id" #taskId="ngModel"
          required pattern="[1-9][0-9]*"/>
-  <button (click)="identification(id)" [disabled]="taskId.invalid">Просмотреть статус</button>
+  <button class="tag" (click)="identification(id)" [disabled]="taskId.invalid">Просмотреть статус</button>
 </div>
 <div *ngIf="task">
   <h2>Статус заявки номер {{id}}</h2>
@@ -38,5 +38,5 @@
     </tr>
     </tbody>
   </table>
-  <button (click)="next()">Просмотреть другую заявку</button>
+  <button class="tag" (click)="next()">Просмотреть другую заявку</button>
 </div>

@@ -66,7 +66,7 @@ export class RequestService {
   addTask(task: Task): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.post<Task>(Paths.urlAddTask, task, httpOptions).pipe(
-      tap((task: Task) => this.log(`Номер заявки: ${task.taskId}. Запомните этот номер, чтобы отслеживать статус заявки`)),
+      tap((task: Task) => {},
       catchError(this.handleError<Task>('addTask'))
     );
   }
@@ -108,7 +108,7 @@ export class RequestService {
   }
 
   private log(message: string) {
-    this.messageService.add('Ваша заявка получена! ' + message);
+    this.messageService.add(message);
   }
 
 }

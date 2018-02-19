@@ -62,9 +62,9 @@
     <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.masterId }}</td>
     <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.name }}</td>
     <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.spec }}</td>
-    <td *ngIf="!task.master && (editOn[i] === false)"></td>
-    <td class="alarm" color="#b6696d" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
-    <td *ngIf="!task.master && (editOn[i] === false)"></td>
+    <!--<td *ngIf="!task.master && (editOn[i] === false)"></td>-->
+    <td class="alarm" color="#b6696d" colspan="3" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
+    <!--<td *ngIf="!task.master && (editOn[i] === false)"></td>-->
     <td *ngIf="(editOn[i] == false)">{{ task.priority }}</td>
     <td *ngIf="(editOn[i] == true)">
       <input class="small_input" type="number" name="priority"
