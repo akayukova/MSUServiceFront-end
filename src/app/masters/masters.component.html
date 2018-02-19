@@ -37,7 +37,7 @@
     <tr *ngFor="let task of tasks; let i = index">
       <td>{{ task.taskId }}</td>
       <td>{{ task.description }}</td>
-      <td>{{task.time | date: 'dd.MM.yy h:mm'}}</td>
+      <td>{{task.time | date: 'dd.MM.yy E h:mm'}}</td>
       <td>{{ task.room + ' ' + task.building}}</td>
       <td>{{ task.priority }}</td>
       <td *ngIf="(editOn[i] == true)">

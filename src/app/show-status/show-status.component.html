@@ -1,0 +1,42 @@
+<div *ngIf="!task">
+  <h2>Введите номер заявки</h2>
+  <input type="number" name="taskId"
+         [(ngModel)]="id" #taskId="ngModel"
+         required pattern="[1-9][0-9]*"/>
+  <button (click)="identification(id)" [disabled]="taskId.invalid">Просмотреть статус</button>
+</div>
+<div *ngIf="task">
+  <h2>Статус заявки номер {{id}}</h2>
+  <table>
+    <colgroup>
+      <col width="40%">
+      <col width="15%">
+      <col width="15%">
+      <col width="15%">
+      <col width="15%">
+    </colgroup>
+    <thead>
+    <tr>
+      <th>Описание</th>
+      <th>Время</th>
+      <th>Комната</th>
+      <th>Имя мастера</th>
+      <th>Профиль</th>
+      <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{ task.description }}</td>
+      <td>{{task.time | date: 'dd.MM.yy E h:mm'}}</td>
+      <td>{{ +task.room + ' ' + task.building }}</td>
+      <td *ngIf="task.master != undefined">{{ task.master.name }}</td>
+      <td *ngIf="task.master != undefined">{{ task.master.spec }}</td>
+      <td *ngIf="!task.master" colspan="2">Мастер не назначен</td>
+      <td class="messages" *ngIf="task.status">завершено</td>
+      <td class="alarm" *ngIf="!task.status">не завершено</td>
+    </tr>
+    </tbody>
+  </table>
+  <button (click)="next()">Просмотреть другую заявку</button>
+</div>

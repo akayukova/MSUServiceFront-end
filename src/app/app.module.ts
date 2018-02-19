@@ -16,6 +16,7 @@ import {HeaderComponent} from './header/header.component';
 import {AuthService} from './services/auth.service';
 import {AuthComponent} from './auth/auth.component';
 import {JsonHttp} from './JsonHttp';
+import { ShowStatusComponent } from './show-status/show-status.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {JsonHttp} from './JsonHttp';
     MessageComponent,
     MastersComponent,
     HeaderComponent,
-    AuthComponent
+    AuthComponent,
+    ShowStatusComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [RequestService, MessageService, AuthService, JsonHttp],

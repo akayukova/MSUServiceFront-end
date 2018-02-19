@@ -40,9 +40,7 @@ export class RequestService {
 
   getTask(id: number): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
-    return this.http.get<Task>(Paths.urlGetTaskById + `${id}`,httpOptions).pipe(
-      catchError(this.handleError<Task>(`getTask id=${id}`))
-    );
+    return this.http.get<Task>(Paths.urlGetTaskById + `${id}`,httpOptions).pipe();
   }
 
   getMaster(id: number): Observable<Master> {
@@ -68,6 +66,7 @@ export class RequestService {
   addTask(task: Task): Observable<Task> {
     httpOptions = mergeAuthToken(httpOptions);
     return this.http.post<Task>(Paths.urlAddTask, task, httpOptions).pipe(
+      tap((task: Task) => this.log(`Номер заявки: ${task.taskId}. Запомните этот номер, чтобы отслеживать статус заявки`)),
       catchError(this.handleError<Task>('addTask'))
     );
   }

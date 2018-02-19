@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.isSignedIn = this.authService.isSignedIn();
     if (this.isSignedIn)
-      this.masterName = localStorage.getItem('authority0');
+      this.masterName = localStorage.getItem('masterName');
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
       this.masterName = localStorage.getItem('masterName');
