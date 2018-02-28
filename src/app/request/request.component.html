@@ -1,41 +1,39 @@
-<div class="col-xs-10">
-  <div class="form-group">
-    <h2 class="messages" *ngIf="!isSignedIn && !done">Здесь Вы можете оставить Вашу заявку!</h2>
-    <ul *ngIf="!done">
-      <li>
-        <label>Опишите Вашу проблему</label>
-        <div aria-setsize="500">
+<div class="form-group">
+  <h2 class="messages" *ngIf="!isSignedIn && !done">Здесь Вы можете оставить Вашу заявку!</h2>
+  <ul *ngIf="!done">
+    <li>
+      <label>Опишите Вашу проблему</label>
+      <div aria-setsize="500">
       <textarea class="big_input" rows="7"
                 name="description" [(ngModel)]="task.description"
                 #description="ngModel" required></textarea>
-          <span [hidden]="description.valid || description.untouched"
-                class="alarm">Обазятельное поле!</span>
-        </div>
-      </li>
-      <li>
-        <label>Введите номер комнаты и корпус</label><br>
-        <input type="number" name="room" [(ngModel)]="task.room"
-               #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
-        <select class="small_input" #build="ngModel" required [(ngModel)]="task.building">
-          <option *ngFor="let build of buildings"
-                  [ngValue]="build"><!--[selected]="task.building == build ? true : null"-->
-            {{build}}
-          </option>
-        </select>
-        <span [hidden]="room.valid || room.untouched"
-              class="alarm">Такой комнаты нет!</span>
-      </li>
-      <li>
-        <button class="tag"
-                [disabled]="room.invalid || description.invalid || build.invalid"
-                (click)="add(); task.room = ''; task.description = ''; room.untouched = true">
-          Подать заявку
-        </button>
-      </li>
-    </ul>
-    <h2 *ngIf="done" class="messages">Ваша заявка принята!</h2>
-    <span *ngIf="done"
-      class="messages"> Номер заявки: {{receivedTask.taskId}}. Запомните этот номер, чтобы отслеживать статус заявки</span>
-    <button *ngIf="done" class="tag" (click)="done = false">Подать еще заявку</button>
-  </div>
+        <span [hidden]="description.valid || description.untouched"
+              class="alarm">Обазятельное поле!</span>
+      </div>
+    </li>
+    <li>
+      <label>Введите номер комнаты и корпус</label><br>
+      <input type="number" name="room" [(ngModel)]="task.room"
+             #room="ngModel" required pattern="([2-9]|(1[0-8]))[0-9][0-9]"/>
+      <select class="small_input" #build="ngModel" required [(ngModel)]="task.building">
+        <option *ngFor="let build of buildings"
+                [ngValue]="build"><!--[selected]="task.building == build ? true : null"-->
+          {{build}}
+        </option>
+      </select>
+      <span [hidden]="room.valid || room.untouched"
+            class="alarm">Такой комнаты нет!</span>
+    </li>
+    <li>
+      <button class="tag"
+              [disabled]="room.invalid || description.invalid || build.invalid"
+              (click)="add(); task.room = ''; task.description = ''; room.untouched = true">
+        Подать заявку
+      </button>
+    </li>
+  </ul>
+  <h2 *ngIf="done" class="messages">Ваша заявка принята!</h2>
+  <span *ngIf="done"
+        class="messages"> Номер заявки: {{receivedTask.taskId}}. Запомните этот номер, чтобы отслеживать статус заявки</span>
+  <button *ngIf="done" class="tag" (click)="done = false">Подать еще заявку</button>
 </div>

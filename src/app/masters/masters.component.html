@@ -1,20 +1,21 @@
 <div *ngIf="tasks">
   <table *ngIf="tasks.length != 0" class="table" border="1" width="100%" cellpadding="6">
     <colgroup>
-      <col width = "5%">
-      <col width = "30%">
-      <col width = "10%">
-      <col width = "10%">
-      <col width = "10%">
-      <col width = "15%">
-      <col width = "10%">
+      <col width="5%">
+      <col width="30%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="15%">
+      <col width="10%">
     </colgroup>
     <thead>
     <tr>
       <th>ID
         <button class="tag" (click)="tableSorting('id')" [disabled]="disableSorting()">
           &#9662;&#9652;
-        </button></th>
+        </button>
+      </th>
       <th>Описание</th>
       <th>Время
         <button class="tag" (click)="tableSorting('time')" [disabled]="disableSorting()">
@@ -24,12 +25,14 @@
       <th>Комната</th>
       <th>Приоритет
         <button class="tag" (click)="tableSorting('priority')" [disabled]="disableSorting()">
-        &#9662;&#9652;
-      </button></th>
+          &#9662;&#9652;
+        </button>
+      </th>
       <th>Статус
         <button class="tag" (click)="tableSorting('status')" [disabled]="disableSorting()">
           &#9662;&#9652;
-        </button></th>
+        </button>
+      </th>
       <th></th>
     </tr>
     </thead>
@@ -40,19 +43,16 @@
       <td>{{task.time | date: 'dd.MM.yy E h:mm'}}</td>
       <td>{{ task.room + ' ' + task.building}}</td>
       <td>{{ task.priority }}</td>
-      <td *ngIf="(editOn[i] == true)">
+      <td *ngIf="editOn[i]">
         <select [(ngModel)]="tasks[i].status">
           <option [ngValue]="true">завершено</option>
           <option [ngValue]="false">не завершено</option>
         </select>
-        <!--<input type="boolean" class="form-control" name="status"
-               [(ngModel)]="task.status" #staus="ngModel"
-               required/>-->
       </td>
-      <td class="messages" *ngIf="!editOn[i] && task.status">завершено</td>
+      <td class="messages in-table" *ngIf="!editOn[i] && task.status">завершено</td>
       <td class="alarm" *ngIf="!editOn[i] && !task.status">не завершено</td>
       <td>
-        <button class="tag" *ngIf="editOn[i] === false" (click)="editor(i)">править</button>
+        <button class="tag" *ngIf="!editOn[i]" (click)="editor(i)">править</button>
         <button class="tag" *ngIf="editOn[i]" (click)="save(i)">ОК</button>
       </td>
     </tr>
@@ -60,9 +60,3 @@
   </table>
   <h3 *ngIf="tasks.length == 0">У Вас пока нет задач</h3>
 </div>
-<!--<select [ngModel]="task.master" (ngModelChange)="onChangeMaster($event, i)">
-  <option  *ngFor="let master of masters; let j = index"
-           [ngValue]="master"  [selected]="task.masterId == master.masterId ? true : null">
-    {{ master.name }}, {{ master.spec }}, {{ master.timetable }}
-  </option>
-</select>-->

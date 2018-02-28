@@ -7,8 +7,6 @@ import {tap} from 'rxjs/operators';
 import {Paths} from '../paths';
 import {Authorities} from '../authorities';
 
-//const jwtDecode = require('jwt-decode');
-
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };

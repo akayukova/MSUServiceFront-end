@@ -123,7 +123,7 @@ export class MastersComponent implements OnInit {
           this.tasks.reverse();
         } else {
           this.tasks.sort(
-            (a: Task, b: Task): number => (<any>a.time) -(<any> b.time));
+            (a: Task, b: Task): number => (<any>a.time) - (<any> b.time));
           this.sorting = 'id';
         }
         break;
@@ -157,10 +157,5 @@ export class MastersComponent implements OnInit {
     return this.editOn.some(elem => elem === true);
   }
 
-  clearAll(): void {
-    this.id = undefined;
-    this.success = false;
-    this.tasks = undefined;
-  }
 
 }

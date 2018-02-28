@@ -10,7 +10,6 @@ import {AuthService} from '../services/auth.service';
 export class HeaderComponent implements OnInit {
 
   isSignedIn = true;
-  isMenuHidden = false;
   authorities: string[] = [];
 
   constructor(private router: Router,
@@ -19,8 +18,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isSignedIn = this.authService.isSignedIn();
-    if (this.isSignedIn)
+    if (this.isSignedIn) {
       this.authorities.push(localStorage.getItem('authority0'));
+    }
     console.log('SIGNED' + this.isSignedIn);
     this.authService.events.subscribe(() => {
       this.isSignedIn = this.authService.isSignedIn();
@@ -32,14 +32,5 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.authorities = [];
     this.router.navigate(['/login']);
-  }
-
-  toggleMenu(e: Event) {
-    this.isMenuHidden = !this.isMenuHidden;
-    e.stopPropagation();
-  }
-
-  @HostListener('document:click') hideMenu() {
-    this.isMenuHidden = true;
   }
 }

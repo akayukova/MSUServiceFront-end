@@ -12,10 +12,10 @@
   <li class="list" routerLinkActive="active" *ngIf='isSignedIn && authorities.indexOf("ADMIN") > -1'>
     <a [routerLink]="['/request']">Подать заявку</a>
   </li>
-  <li class="list" class="list" routerLinkActive="active" *ngIf="!isSignedIn">
+  <li class="list" class="list" *ngIf="!isSignedIn">
     <a [routerLink]="['/login']">Войти</a>
   </li>
-  <li class="list" routerLinkActive="active" *ngIf='!isSignedIn'>
+  <li class="list" *ngIf='!isSignedIn'>
     <a [routerLink]="['/status']">Просмотреть статус заявки</a>
   </li>
 </ul>

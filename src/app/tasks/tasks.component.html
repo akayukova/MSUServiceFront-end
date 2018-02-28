@@ -59,12 +59,13 @@
         </option>
       </select>
     </td>
-    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.masterId }}</td>
-    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.name }}</td>
-    <td *ngIf="(editOn[i] == false) && task.master != undefined">{{ task.master.spec }}</td>
-    <!--<td *ngIf="!task.master && (editOn[i] === false)"></td>-->
+    <!--ng-container!!!!!!!!!!!!!-->
+    <ng-container *ngIf="!editOn[i] && task.master != undefined">
+    <td >{{ task.masterId }}</td>
+    <td >{{ task.master.name }}</td>
+    <td >{{ task.master.spec }}</td>
+    </ng-container>
     <td class="alarm" color="#b6696d" colspan="3" *ngIf="!task.master && (editOn[i] === false)">Мастер не назначен!</td>
-    <!--<td *ngIf="!task.master && (editOn[i] === false)"></td>-->
     <td *ngIf="(editOn[i] == false)">{{ task.priority }}</td>
     <td *ngIf="(editOn[i] == true)">
       <input class="small_input" type="number" name="priority"
@@ -74,7 +75,7 @@
       <div [hidden]="priority.valid || priority.untouched"
            class="alarm">Числа от 1 до 10!</div>
     </td>
-    <td class="messages" *ngIf="task.status">завершено</td>
+    <td class="in_table messages" *ngIf="task.status">завершено</td>
     <td class="alarm" *ngIf="!task.status">не завершено</td>
     <td>
       <button class="tag" *ngIf="!editOn[i]" (click)="editor(i)">править</button>
